@@ -1071,6 +1071,139 @@
     .side-dash { display: inline-flex; align-items: center; gap: 8px; align-self: flex-start; width: auto; margin-top: 18px; padding: 10px 18px; border-radius: 9999px; background: #e11d48; color: #ffffff; font-size: 16px; border: 2px solid #111111; box-shadow: 0 4px 12px rgba(225,29,72,.3); }
     .side-dash::before { content: "\2699"; font-size: 16px; }
     .side-dash:hover { opacity: .85; }
+
+    /* ===== Desktop layout (900px and up) ===== */
+    @media (min-width: 900px) {
+      header { padding: 18px 40px; }
+      .pill { max-width: 1240px; height: 56px; padding: 0 10px 0 26px; }
+      .logo { font-size: 28px; }
+
+      /* Hero: photo fills the left half, text sits in the right half */
+      .top { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); min-height: 100vh; }
+      .hero { width: 100%; max-width: none; height: 100vh; justify-self: stretch; border-radius: 0 48px 48px 0; }
+      .slogan { padding: 96px clamp(40px, 6vw, 110px) 48px; }
+      .slogan h1 { font-size: clamp(44px, 4.4vw, 76px); line-height: 1.05; }
+      .slogan p { font-size: clamp(18px, 1.5vw, 24px); }
+      .cycle { justify-content: flex-start; margin-top: 24px; }
+
+      /* Moving tab strip */
+      .tabs { padding: 40px 0 16px; }
+
+      /* Pricing banner */
+      .promo { max-width: 1160px; margin: 40px auto 72px; padding: 64px 48px 68px; border-radius: 36px; }
+      .promo-price { font-size: 80px; }
+      .promo-price span { font-size: 26px; }
+      .promo-eyebrow { font-size: 14px; }
+      .promo-sub { font-size: 18px; margin: 14px 0 28px; }
+      .promo-badges { font-size: 15px; gap: 10px 28px; margin-bottom: 30px; }
+      .promo-cta { padding: 16px 40px; font-size: 17px; transition: transform .2s ease; }
+      .promo-cta:hover { transform: translateY(-2px); }
+
+      /* Section titles */
+      .how-title, .services-list-title, .gallery-title, .faq-title, .about-title, .contact-title, .location-title { font-size: 36px; margin-bottom: 36px; }
+      .contact-title, .location-title { margin-bottom: 10px; }
+
+      /* How it works: three steps in a row */
+      .how { padding: 8px 40px 80px; }
+      .how-steps { flex-direction: row; max-width: 1100px; gap: 40px; align-items: stretch; }
+      .how-step { flex: 1; flex-direction: column; gap: 16px; padding: 28px; border: 2px solid #111111; border-radius: 24px; background: #fff; }
+      .how-num { width: 44px; height: 44px; font-size: 19px; }
+      .how-text h3 { font-size: 20px; margin: 0 0 8px; }
+      .how-text p { font-size: 16px; line-height: 1.55; }
+
+      /* Services: four across */
+      .services-list { padding: 24px 40px 80px; }
+      .services-grid { max-width: 1100px; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+      .service-card { padding: 20px 18px; font-size: 16px; border-radius: 18px; transition: transform .2s ease, box-shadow .2s ease; }
+      .service-card:hover { transform: translateY(-3px); box-shadow: 0 10px 22px rgba(0,0,0,.1); }
+      .service-card.full { grid-column: span 4; }
+
+      /* Gallery: one big photo plus four small ones */
+      .gallery { padding: 8px 40px 80px; }
+      .gallery-grid { max-width: 1200px; margin: 0 auto; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+      .gallery-item { border-radius: 22px; transition: transform .25s ease; }
+      .gallery-item:hover { transform: translateY(-4px); }
+      .gallery-item.wide { grid-column: span 2; grid-row: span 2; aspect-ratio: auto; }
+
+      /* FAQ, About, Contact, Location */
+      .faq { padding: 8px 40px 80px; }
+      .faq-list { max-width: 820px; gap: 14px; }
+      .faq-q { font-size: 17px; padding: 20px 24px; }
+      .faq-a-inner { font-size: 16px; padding: 0 24px 20px; }
+      .about { max-width: 900px; padding: 8px 40px 80px; }
+      .about p { font-size: 17px; }
+      .contact { padding: 8px 40px 72px; }
+      .contact-sub { font-size: 16px; margin-bottom: 28px; }
+      .location { padding: 24px 40px 88px; }
+      .location-map { max-width: 960px; height: 400px; border-radius: 26px; }
+      footer { padding: 48px 40px 56px; }
+
+      /* Booking popup */
+      .bk-modal { max-width: 520px; }
+
+      /* Dashboard */
+      .adm-top { padding: 16px 40px; }
+      .adm-tabs { max-width: 1040px; padding: 0 24px; }
+      .adm-wrap { max-width: 1040px; padding: 20px 24px 100px; }
+      .adm-hero-thumb { height: 280px; }
+      #adm-bookings { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; align-items: start; }
+      #adm-bookings .adm-bk, #adm-bookings .adm-empty { margin-bottom: 0; }
+      #adm-bookings .adm-empty { grid-column: 1 / -1; }
+    }
+    @media (min-width: 1500px) {
+      .slogan { padding-right: 140px; }
+      .gallery-grid { max-width: 1320px; }
+    }
+
+    /* ===== Desktop: split layouts, left-aligned headings ===== */
+    @media (min-width: 900px) {
+      .how, .services-list, .gallery { max-width: 1280px; margin-left: auto; margin-right: auto; }
+      .how-title, .services-list-title, .gallery-title { text-align: left; }
+      .how-steps, .gallery-grid { max-width: none; }
+
+      /* Pricing: price on the left, perks + button on the right */
+      .promo { display: grid; grid-template-columns: 1.25fr 1fr; gap: 64px; align-items: center; text-align: left; padding: 64px; }
+      .promo-price { font-size: 88px; }
+      .promo-sub { max-width: 520px; margin-bottom: 0; }
+      .promo-side { padding: 36px; border-radius: 26px; background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.28); }
+      .promo-badges { flex-direction: column; align-items: flex-start; justify-content: flex-start; gap: 16px; font-size: 18px; margin-bottom: 30px; }
+      .promo-cta { display: block; width: 100%; padding: 18px; }
+
+      /* Services: heading beside a 3x3 grid */
+      .services-list { display: grid; grid-template-columns: 320px minmax(0, 1fr); gap: 64px; align-items: center; }
+      .services-list-title { font-size: 48px; line-height: 1.05; margin: 0; }
+      .services-grid { max-width: none; margin: 0; grid-template-columns: repeat(3, 1fr); }
+      .service-card.full { grid-column: span 1; justify-content: flex-start; }
+
+      /* FAQ beside About, Contact beside Location */
+      .split { max-width: 1280px; margin: 0 auto; padding: 0 40px 88px; display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: start; }
+      .split > section { padding: 0; margin: 0; max-width: none; }
+      .split .faq-title, .split .about-title, .split .contact-title, .split .location-title { text-align: left; font-size: 36px; margin: 0 0 24px; }
+      .split .faq-list { max-width: none; }
+      .split-a .about { padding: 40px; border: 2px solid #111111; border-radius: 28px; background: #fdf2f4; }
+      .split-a .about-title { margin-bottom: 20px; }
+
+      .split-b { align-items: stretch; }
+      .split-b .contact { display: flex; flex-direction: column; justify-content: center; text-align: left; padding: 48px; background: #111111; color: #ffffff; border-radius: 28px; }
+      .split-b .contact-title { color: #ffffff; margin-bottom: 10px; }
+      .split-b .contact-sub { color: #c7c7cc; font-size: 17px; margin: 0 0 28px; }
+      .contact-btns { display: flex; flex-direction: column; gap: 14px; }
+      .split-b .contact-call { width: 100%; justify-content: center; margin: 0; }
+      .split-b .contact-call:not(.contact-wa) { background: #e11d48; color: #ffffff; }
+      .split-b .location { text-align: left; }
+      .split-b .location-sub { margin: 0 0 16px; }
+      .split-b .location-map { max-width: none; width: 100%; height: 340px; margin: 0; }
+
+      /* Footer in columns */
+      footer { display: grid; grid-template-columns: 1fr auto auto; column-gap: 56px; align-items: center; text-align: left;
+        padding: 56px max(40px, calc((100% - 1200px) / 2)) 40px; }
+      .footer-brand .footer-tag { margin-bottom: 0; }
+      .footer-logo { font-size: 26px; }
+      footer .footer-links { margin: 0; gap: 10px 28px; }
+      footer .footer-social { margin: 0; text-align: right; }
+      footer .footer-rule, footer .footer-copy { grid-column: 1 / -1; }
+      footer .footer-rule { margin: 32px 0 16px; }
+    }
   </style>
 </head>
 <body class="is-loading">
@@ -1111,15 +1244,19 @@
     </main>
   </div>
   <section class="promo" id="prices">
+    <div class="promo-main">
     <p class="promo-eyebrow">Pricing</p>
     <p class="promo-price" id="promo-price"><span>Services from</span><br>$50 to $200</p>
     <p class="promo-sub">Final price depends on the style you choose. Over 25 years of experience &middot; short hair specialists.</p>
+    </div>
+    <div class="promo-side">
     <ul class="promo-badges">
       <li>Clean</li>
       <li>Neat</li>
       <li>Beautiful</li>
     </ul>
     <button type="button" class="promo-cta" data-open-booking>Book Today</button>
+    </div>
   </section>
 
   <section class="how">
@@ -1299,6 +1436,7 @@
     </div>
   </section>
 
+  <div class="split split-a">
   <section class="faq">
     <h2 class="faq-title">Frequently Asked <span>Questions</span></h2>
     <div class="faq-list" id="faq-list">
@@ -1347,12 +1485,16 @@
     <p>From pixie cuts and finger waves to Marcel curls, roller sets, and edge styling, every appointment is about more than hair. As the studio's motto goes: it's not just hair, it's confidence.</p>
     <p>Let Tiffaney bring out the best in your short hair.</p>
   </section>
+  </div>
 
+  <div class="split split-b">
   <section class="contact" id="contact">
     <h2 class="contact-title">Get In <span>Touch</span></h2>
     <p class="contact-sub">Spaces fill up fast &mdash; call or text to book today.</p>
+    <div class="contact-btns">
     <a class="contact-call" href="tel:+13184645073" target="_self" rel="nofollow" role="button" aria-label="Call Tiffaney's Crown &amp; Curls at (318) 464-5073">&#128222; Call (318) 464-5073</a>
     <a class="contact-call contact-wa" href="https://wa.me/13184645073" target="_blank" rel="noopener">&#128172; Message on WhatsApp</a>
+    </div>
   </section>
 
   <section class="location" id="location">
@@ -1362,10 +1504,13 @@
       src="https://www.google.com/maps?q=Louisiana&amp;output=embed" title="Map of Louisiana"></iframe>
     <a class="location-dir" href="https://www.google.com/maps/search/?api=1&amp;query=Louisiana" target="_blank" rel="noopener">Get Directions</a>
   </section>
+  </div>
 
   <footer>
+    <div class="footer-brand">
     <p class="footer-logo">Tiffaney's <span>Crown &amp; Curls</span></p>
     <p class="footer-tag">Short Hair &middot; Big Style</p>
+    </div>
     <ul class="footer-links">
       <li><a href="#home">Home</a></li>
       <li><a href="#services">Services</a></li>
