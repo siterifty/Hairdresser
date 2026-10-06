@@ -1,0 +1,2250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Tiffaney's Crown & Curls</title>
+  <style>
+    :root {
+      color-scheme: light;
+      box-sizing: border-box;
+    }
+    *, *::before, *::after { box-sizing: inherit; }
+    html, body {
+      margin: 0;
+      min-height: 100%;
+      background: #ffffff;
+      overflow-x: hidden;
+      max-width: 100%;
+    }
+    header {
+      position: fixed;
+      top: env(safe-area-inset-top, 0px);
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: center;
+      padding: 12px 16px;
+      z-index: 10;
+      pointer-events: none;
+    }
+    .pill {
+      pointer-events: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 48px;
+      width: 100%;
+      max-width: 480px;
+      padding: 0 6px 0 16px;
+      border-radius: 9999px;
+      background: rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(20px) saturate(180%) brightness(1.1);
+      -webkit-backdrop-filter: blur(20px) saturate(180%) brightness(1.1);
+      border: 2px solid #111111;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    }
+    .logo-group {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+    }
+    .logo {
+      font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+      font-size: 24px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: #e11d48;
+      -webkit-text-stroke: 2px #ffffff;
+      paint-order: stroke fill;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+    }
+    .logo-sub {
+      font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #ffffff;
+      -webkit-text-stroke: 1.5px #e11d48;
+      paint-order: stroke fill;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+    }
+    .menu-btn {
+      width: 40px;
+      height: 40px;
+      border: none;
+      border-radius: 8px;
+      background: transparent;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: opacity 0.2s ease;
+    }
+    .menu-btn:hover,
+    .menu-btn:focus-visible {
+      opacity: 0.6;
+      outline: none;
+    }
+    .menu-btn span {
+      display: block;
+      width: 28px;
+      height: 4px;
+      border-radius: 2px;
+      background: #ffffff;
+      box-shadow: 0 0 0 1px #111111;
+      transition: width 0.25s ease;
+    }
+    .menu-btn span:nth-child(2) {
+      width: 22px;
+    }
+    .menu-btn:hover span:nth-child(2) {
+      width: 28px;
+    }
+
+    .top {
+      display: block;
+    }
+    .hero {
+      width: 100%;
+      max-width: 100%;
+      aspect-ratio: 1 / 1;
+      background-color: #111111;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      border-radius: 0 0 40px 40px;
+      overflow: hidden;
+    }
+    .hero.loading {
+      background-image: linear-gradient(100deg, #1c1c1c 30%, #3a3a3a 50%, #1c1c1c 70%);
+      background-size: 200% 100%;
+      animation: hero-shimmer 1.4s linear infinite;
+    }
+    @keyframes hero-shimmer {
+      from { background-position: 200% 0; }
+      to { background-position: -200% 0; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .hero.loading { animation: none; }
+    }
+    .slogan {
+      text-align: center;
+      padding: 16px 16px 40px;
+      font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+      color: #111111;
+    }
+    .slogan h1 {
+      font-size: 24px;
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      white-space: nowrap;
+      color: #e11d48;
+      margin: 0 0 12px;
+    }
+    .slogan p {
+      font-size: 18px;
+      font-weight: 700;
+      color: #111111;
+      margin: 0;
+      min-height: 2.8em;
+      transition: opacity 0.5s ease;
+    }
+    .slogan p.fade-out {
+      opacity: 0;
+    }
+    .cycle {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      margin-top: 16px;
+    }
+    .cycle-nav {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 2px solid #111111;
+      background: #ffffff;
+      color: #111111;
+      font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+      font-size: 20px;
+      font-weight: 700;
+      line-height: 1;
+      cursor: pointer;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.2s ease;
+    }
+    .cycle-nav:hover,
+    .cycle-nav:focus-visible {
+      opacity: 0.6;
+      outline: none;
+    }
+    .count-wrap {
+      border: 2px solid #e11d48;
+      border-radius: 50%;
+      background: none;
+      padding: 0;
+      cursor: pointer;
+      position: relative;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .ring {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      transform: rotate(-90deg);
+    }
+    .ring-track {
+      fill: #ffffff;
+      stroke: #e5e5ea;
+      stroke-width: 3;
+    }
+    .ring-fill {
+      fill: none;
+      stroke: #e11d48;
+      stroke-width: 3;
+      stroke-dasharray: 100.53;
+      stroke-dashoffset: 0;
+    }
+    .ring-fill.run {
+      animation: ring-drain 5s linear forwards;
+    }
+    .ring-fill.paused {
+      animation-play-state: paused;
+    }
+    #rotating-desc {
+      cursor: pointer;
+    }
+    @keyframes ring-drain {
+      from { stroke-dashoffset: 0; }
+      to { stroke-dashoffset: 100.53; }
+    }
+    .ring-fill.paused {
+      animation-play-state: paused;
+    }
+    .count-num {
+      position: relative;
+      font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+      font-size: 14px;
+      font-weight: 800;
+      color: #111111;
+    }
+      to { transform: scaleX(0); }
+    }
+
+    .tabs {
+      overflow: hidden;
+      contain: paint;
+      max-width: 100%;
+      width: 100%;
+      padding: 8px 0 32px;
+      -webkit-mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+              mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+    }
+    .tabs-track {
+      display: flex;
+      width: max-content;
+      gap: 12px;
+      padding-right: 12px; /* matches the gap so both halves are identical and the loop is seamless */
+      animation: tabs-scroll 20s linear infinite;
+    }
+    .tab {
+      flex: 0 0 auto;
+      padding: 10px 20px;
+      border-radius: 9999px;
+      border: 2px solid #111111;
+      background: #ffffff;
+      color: #111111;
+      font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+      font-size: 15px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+    .tab.accent {
+      background: #d9f99d;
+      color: #111111;
+      border-color: #111111;
+    }
+    @keyframes tabs-scroll {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .tabs-track { animation: none; }
+    }
+
+    .promo {
+      margin: 0 16px 40px;
+      padding: 28px 20px 32px;
+      border-radius: 24px;
+      background: linear-gradient(160deg, #e11d48 0%, #be123c 100%);
+      text-align: center;
+      font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+      color: #ffffff;
+      box-shadow: 0 12px 28px rgba(225, 29, 72, 0.25);
+    }
+    .promo-eyebrow {
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #ffd1dc;
+      margin: 0 0 8px;
+    }
+    .promo-price {
+      font-size: 48px;
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      margin: 0;
+      line-height: 1;
+    }
+    .promo-price span {
+      font-size: 20px;
+      font-weight: 800;
+      vertical-align: middle;
+    }
+    .promo-sub {
+      font-size: 15px;
+      font-weight: 700;
+      margin: 8px 0 20px;
+      color: #ffe4ea;
+    }
+    .promo-badges {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px 16px;
+      margin: 0 0 22px;
+      padding: 0;
+      list-style: none;
+      font-size: 13px;
+      font-weight: 700;
+    }
+    .promo-badges li {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .promo-badges li::before {
+      content: "\2713";
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: #ffffff;
+      color: #e11d48;
+      font-size: 11px;
+      font-weight: 900;
+    }
+    .promo-cta {
+      display: inline-block;
+      padding: 14px 32px;
+      border-radius: 9999px;
+      background: #111111;
+      color: #ffffff;
+      font-weight: 800;
+      font-size: 15px;
+      text-decoration: none;
+      border: 2px solid #ffffff;
+    }
+
+    .services-list {
+      padding: 8px 20px 44px;
+      font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+      color: #111111;
+    }
+    .services-list-title {
+      text-align: center;
+      font-size: 24px;
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      margin: 0 0 20px;
+    }
+    .services-list-title span {
+      color: #e11d48;
+    }
+    .services-grid {
+      max-width: 480px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    .service-card {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 12px;
+      border: 2px solid #111111;
+      border-radius: 14px;
+      background: #ffffff;
+      font-size: 14px;
+      font-weight: 800;
+    }
+    .service-card-icon {
+      flex: 0 0 auto;
+      font-size: 18px;
+    }
+    .service-card.full {
+      grid-column: span 2;
+      justify-content: center;
+      background: #fdf2f4;
+      color: #e11d48;
+    }
+
+    .how {
+      padding: 8px 20px 44px;
+      font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+      color: #111111;
+    }
+    .how-title {
+      text-align: center;
+      font-size: 24px;
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      margin: 0 0 28px;
+    }
+    .how-title span {
+      color: #e11d48;
+    }
+    .how-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      max-width: 480px;
+      margin: 0 auto;
+    }
+    .how-step {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+    }
+    .how-num {
+      flex: 0 0 auto;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 2px solid #e11d48;
+      background: #ffffff;
+      color: #e11d48;
+      font-weight: 900;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .how-text h3 {
+      margin: 4px 0 4px;
+      font-size: 16px;
+      font-weight: 800;
+    }
+    .how-text p {
+      margin: 0;
+      font-size: 14px;
+      color: #6e6e73;
+      line-height: 1.4;
+    }
+
+    .gallery {
+      padding: 8px 16px 44px;
+      font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+      color: #111111;
+    }
+    .gallery-title {
+      text-align: center;
+      font-size: 24px;
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      margin: 0 0 20px;
+    }
+    .gallery-title span {
+      color: #e11d48;
+    }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+    .gallery-item {
+      aspect-ratio: 1 / 1;
+      border-radius: 16px;
+      background-color: #111111;
+      background-size: cover;
+      background-position: center;
+      border: 2px solid #111111;
+    }
+    .gallery-item.wide {
+      grid-column: span 2;
+      aspect-ratio: 2 / 1;
+    }
+
+    .faq {
+      padding: 8px 20px 48px;
+      font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+      color: #111111;
+    }
+    .faq-title {
+      text-align: center;
+      font-size: 24px;
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      margin: 0 0 20px;
+    }
+    .faq-title span {
+      color: #e11d48;
+    }
+    .faq-list {
+      max-width: 520px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .faq-item {
+      border: 2px solid #111111;
+      border-radius: 16px;
+      overflow: hidden;
+      background: #ffffff;
+    }
+    .faq-q {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 16px 18px;
+      background: none;
+      border: none;
+      text-align: left;
+      font-family: inherit;
+      font-size: 15px;
+      font-weight: 800;
+      color: #111111;
+      cursor: pointer;
+    }
+    .faq-q-icon {
+      flex: 0 0 auto;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      border: 2px solid #e11d48;
+      color: #e11d48;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      font-weight: 900;
+      transition: transform 0.25s ease;
+    }
+    .faq-item.open .faq-q-icon {
+      transform: rotate(45deg);
+    }
+    .faq-a {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+    .faq-a-inner {
+      padding: 0 18px 16px;
+      font-size: 14px;
+      color: #6e6e73;
+      line-height: 1.5;
+    }
+
+    .about {
+      padding: 8px 24px 48px;
+      font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+      color: #111111;
+      max-width: 560px;
+      margin: 0 auto;
+    }
+    .about-title {
+      text-align: center;
+      font-size: 24px;
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      margin: 0 0 16px;
+    }
+    .about-title span {
+      color: #e11d48;
+    }
+    .about p {
+      font-size: 15px;
+      line-height: 1.7;
+      color: #3c3c43;
+      margin: 0 0 16px;
+    }
+    .about p:last-child {
+      margin-bottom: 0;
+    }
+
+    .contact {
+      padding: 8px 24px 44px;
+      font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+      color: #111111;
+      text-align: center;
+    }
+    .contact-title {
+      font-size: 24px;
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      margin: 0 0 8px;
+    }
+    .contact-title span {
+      color: #e11d48;
+    }
+    .contact-sub {
+      font-size: 14px;
+      color: #6e6e73;
+      margin: 0 0 20px;
+    }
+    .contact-call {
+      position: relative;
+      z-index: 2;
+      cursor: pointer;
+      -webkit-tap-highlight-color: rgba(225, 29, 72, 0.3);
+      touch-action: manipulation;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 16px 28px;
+      border-radius: 9999px;
+      background: #111111;
+      color: #ffffff;
+      font-weight: 800;
+      font-size: 18px;
+      text-decoration: none;
+    }
+
+    footer {
+      padding: 36px 24px 48px;
+      background: #111111;
+      color: #ffffff;
+      font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+      text-align: center;
+    }
+    .footer-logo {
+      font-size: 20px;
+      font-weight: 900;
+      color: #ffffff;
+      margin: 0 0 4px;
+    }
+    .footer-logo span {
+      color: #e11d48;
+    }
+    .footer-tag {
+      font-size: 13px;
+      color: #a1a1a6;
+      margin: 0 0 24px;
+    }
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px 20px;
+      list-style: none;
+      padding: 0;
+      margin: 0 0 24px;
+      font-size: 14px;
+      font-weight: 700;
+    }
+    .footer-links a {
+      color: #ffffff;
+      text-decoration: none;
+    }
+    .footer-social {
+      font-size: 14px;
+      font-weight: 700;
+      color: #ffffff;
+      margin: 0 0 20px;
+    }
+    .footer-social a {
+      color: #ff6b85;
+      text-decoration: none;
+    }
+    .footer-rule {
+      border: none;
+      border-top: 1px solid #2c2c2e;
+      margin: 0 0 16px;
+    }
+    .footer-copy {
+      font-size: 12px;
+      color: #6e6e73;
+      margin: 0;
+    }
+
+    /* Desktop: image on the left (square, full height of the viewport when possible),
+       slogan on the right, vertically centred */
+    @media (min-width: 900px) {
+      .top {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        align-items: center;
+        min-height: 100vh;
+      }
+      .hero {
+        height: 100vh;
+        width: 100vh;
+        max-width: 100%;
+        aspect-ratio: auto;
+        justify-self: start;
+      }
+      .slogan {
+        text-align: left;
+        padding: 48px 64px;
+      }
+      .slogan h1 {
+        font-size: 56px;
+        white-space: normal;
+      }
+      .slogan p {
+        font-size: 20px;
+      }
+    }
+    /* No blue flash or focus ring on mouse/tap; keyboard focus still visible */
+    *, *::before, *::after {
+      -webkit-tap-highlight-color: transparent;
+    }
+    *:focus:not(:focus-visible) {
+      outline: none;
+    }
+    button, a {
+      -webkit-user-select: none;
+      user-select: none;
+    }
+
+    /* Book Now call to action */
+    .cta {
+      display: inline-block;
+      margin-top: 24px;
+      padding: 16px 40px;
+      border-radius: 9999px;
+      border: 2px solid #111111;
+      background: #e11d48;
+      color: #ffffff;
+      font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+      font-size: 18px;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+      text-decoration: none;
+      box-shadow: 0 8px 20px rgba(225, 29, 72, 0.35);
+      transition: transform 0.2s ease;
+    }
+    .cta:hover,
+    .cta:focus-visible {
+      transform: translateY(-2px);
+    }
+    .cta-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      width: 100%;
+      max-width: 400px;
+      margin: 24px auto 0;
+    }
+    .cta-row .cta {
+      margin-top: 0;
+      width: 100%;
+      padding: 14px 8px;
+      font-size: 16px;
+      text-align: center;
+      white-space: nowrap;
+    }
+    .cta-outline {
+      background: #ffffff;
+      color: #111111;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+    }
+    @media (min-width: 900px) {
+      .cta-row {
+        margin-left: 0;
+      }
+    }
+
+    /* Sidebar menu */
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.45);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+      z-index: 15;
+    }
+    .overlay.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .sidebar {
+      position: fixed;
+      top: 0;
+      right: 0;
+      height: 100%;
+      width: min(320px, 82vw);
+      background: #ffffff;
+      border-left: 2px solid #111111;
+      padding: 24px 24px 32px;
+      display: flex;
+      flex-direction: column;
+      transform: translateX(100%);
+      transition: transform 0.3s ease;
+      z-index: 20;
+      font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+    }
+    .sidebar.open {
+      transform: translateX(0);
+    }
+    .sidebar {
+      overflow-y: auto;
+      overscroll-behavior: contain;
+    }
+    html.menu-open,
+    html.menu-open body {
+      overflow: hidden;
+      overscroll-behavior: none;
+    }
+    .side-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+    .close-btn {
+      align-self: flex-start;
+      flex-shrink: 0;
+      padding: 10px 20px;
+      border: 2px solid #111111;
+      border-radius: 9999px;
+      background: #ffffff;
+      color: #111111;
+      font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+    .close-btn:hover,
+    .close-btn:focus-visible {
+      background: #e11d48;
+      color: #ffffff;
+    }
+    .side-nav {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+    .side-nav a {
+      font-size: 22px;
+      font-weight: 800;
+      color: #111111;
+      text-decoration: none;
+      padding: 14px 0;
+      border-bottom: 2px solid #111111;
+    }
+    .side-brand {
+      margin: 0;
+    }
+    .side-brand .logo-group {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+    }
+    .side-brand .logo {
+      font-size: 28px;
+      -webkit-text-stroke: 1.5px #111111;
+    }
+    .side-brand .logo-sub {
+      -webkit-text-stroke: 1.5px #e11d48;
+      color: #111111;
+    }
+    .side-brand .side-slogan {
+      margin: 12px 0 0;
+      font-size: 16px;
+      font-weight: 800;
+      color: #e11d48;
+    }
+    .sidebar .cta {
+      margin-top: 24px;
+      text-align: center;
+    }
+
+    /* Skeleton shimmer for all content while the page is loading */
+    :root {
+      --shimmer: linear-gradient(100deg, #ececec 30%, #f8f8f8 50%, #ececec 70%);
+    }
+    body.is-loading .logo,
+    body.is-loading .logo-sub,
+    body.is-loading .slogan h1,
+    body.is-loading .slogan p,
+    body.is-loading .count-num,
+    body.is-loading .cta,
+    body.is-loading .cycle-nav,
+    body.is-loading .count-wrap,
+    body.is-loading .tab,
+    body.is-loading .menu-btn span {
+      color: transparent !important;
+      -webkit-text-stroke: 0 !important;
+      text-shadow: none !important;
+      border-color: transparent !important;
+      box-shadow: none !important;
+      background-color: transparent !important;
+      background-image: var(--shimmer) !important;
+      background-size: 200% 100% !important;
+      animation: hero-shimmer 1.4s linear infinite;
+    }
+    body.is-loading .cycle-nav,
+    body.is-loading .count-wrap {
+      border-radius: 50% !important;
+    }
+    body.is-loading .ring {
+      opacity: 0;
+    }
+    body.is-loading .menu-btn span {
+      box-shadow: none !important;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      body.is-loading .logo,
+      body.is-loading .logo-sub,
+      body.is-loading .slogan h1,
+      body.is-loading .slogan p,
+      body.is-loading .count-num,
+      body.is-loading .cta,
+      body.is-loading .cycle-nav,
+      body.is-loading .count-wrap,
+      body.is-loading .tab,
+      body.is-loading .menu-btn span {
+        animation: none;
+      }
+    }
+
+    button.cta, button.promo-cta { border: none; font: inherit; cursor: pointer; }
+    .contact-wa { background: #25d366; margin-top: 12px; }
+    .bk-backdrop { position: fixed; inset: 0; background: rgba(0,0,0,0.5); opacity: 0; pointer-events: none; transition: opacity .25s ease; z-index: 50; }
+    .bk-backdrop.open { opacity: 1; pointer-events: auto; }
+    .bk-modal { position: fixed; left: 50%; top: 50%; transform: translate(-50%, -50%) scale(.96); opacity: 0; pointer-events: none; transition: all .25s ease; z-index: 51; width: calc(100% - 32px); max-width: 420px; max-height: 88vh; overflow-y: auto; background: #ffffff; border-radius: 24px; padding: 24px; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif; color: #111111; }
+    .bk-modal.open { opacity: 1; transform: translate(-50%, -50%) scale(1); pointer-events: auto; }
+    .bk-modal h3 { margin: 0 0 4px; font-size: 22px; font-weight: 900; color: #e11d48; }
+    .bk-modal .bk-sub { margin: 0 0 16px; font-size: 14px; color: #6e6e73; }
+    .bk-field { display: flex; flex-direction: column; gap: 6px; margin-bottom: 12px; }
+    .bk-field label { font-size: 13px; font-weight: 700; }
+    .bk-field input, .bk-field select, .bk-field textarea { font: inherit; font-size: 16px; padding: 12px; border: 2px solid #111111; border-radius: 12px; background: #fff; color: #111; width: 100%; box-sizing: border-box; }
+    .bk-field textarea { resize: vertical; min-height: 70px; }
+    .bk-row { display: flex; gap: 10px; }
+    .bk-row .bk-field { flex: 1; min-width: 0; }
+    .bk-error { color: #e11d48; font-size: 13px; font-weight: 700; min-height: 18px; margin: 0 0 8px; }
+    .bk-submit { width: 100%; padding: 16px; border: none; border-radius: 9999px; background: #e11d48; color: #fff; font: inherit; font-weight: 800; font-size: 17px; cursor: pointer; }
+    .bk-submit:disabled { opacity: .6; cursor: default; }
+    .bk-done { text-align: center; padding: 18px 0 4px; }
+    .bk-done[hidden], #bk-form[hidden] { display: none !important; }
+    .bk-done-icon { width: 64px; height: 64px; margin: 0 auto 14px; border-radius: 50%; background: #e11d48; color: #fff; font-size: 34px; line-height: 64px; font-weight: 800; }
+    .bk-done h4 { margin: 0 0 8px; font-size: 22px; font-weight: 900; color: #111; }
+    .bk-done p { margin: 0 0 20px; font-size: 15px; color: #6e6e73; line-height: 1.5; }
+    .bk-close { position: absolute; top: 12px; right: 14px; background: none; border: none; font-size: 26px; line-height: 1; cursor: pointer; color: #111; }
+
+    .location { padding: 40px 20px; text-align: center; font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif; color: #111111; }
+    .location-title { font-size: 24px; font-weight: 900; letter-spacing: -0.02em; margin: 0 0 8px; }
+    .location-title span { color: #e11d48; }
+    .location-sub { font-size: 16px; font-weight: 700; margin: 0 0 16px; }
+    .location-map { width: 100%; max-width: 480px; height: 280px; border: 2px solid #111111; border-radius: 20px; display: block; margin: 0 auto; }
+    .location-dir { display: inline-flex; margin-top: 16px; padding: 14px 24px; border-radius: 9999px; background: #111111; color: #ffffff; font-weight: 800; text-decoration: none; }
+
+    .bk-modal { display: flex; flex-direction: column; padding: 0; overflow: hidden; }
+    .bk-head { position: sticky; top: 0; z-index: 2; background: #ffffff; padding: 24px 24px 12px; border-bottom: 1px solid #ececf0; border-radius: 24px 24px 0 0; flex-shrink: 0; }
+    .bk-head .bk-close { position: absolute; top: 18px; right: 18px; }
+    .bk-backdrop { touch-action: none; }
+    .bk-modal, .bk-body, #adm-panel { overscroll-behavior: contain; }
+    .bk-body { overflow-y: auto; padding: 16px 24px 24px; -webkit-overflow-scrolling: touch; }
+    .bk-dd { position: relative; }
+    .bk-dd-btn { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 12px; font: inherit; font-size: 16px; text-align: left; background: #fff; color: #111; border: 2px solid #111111; border-radius: 12px; cursor: pointer; box-sizing: border-box; }
+    .bk-dd-btn #bk-dd-label { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .bk-dd-arrow { transition: transform .2s ease; }
+    .bk-dd-btn[aria-expanded="true"] .bk-dd-arrow { transform: rotate(180deg); }
+    .bk-dd-list { list-style: none; margin: 6px 0 0; padding: 6px; border: 2px solid #111111; border-radius: 12px; background: #fff; max-height: 240px; overflow-y: auto; }
+    .bk-dd-list li { display: flex; align-items: center; gap: 10px; padding: 11px 10px; border-radius: 8px; font-size: 15px; cursor: pointer; user-select: none; }
+    .bk-dd-list li:hover { background: #fdf2f4; }
+    .bk-dd-list li.selected { color: #e11d48; font-weight: 700; }
+    .bk-check { width: 18px; height: 18px; border: 2px solid #111111; border-radius: 5px; flex-shrink: 0; display: inline-flex; align-items: center; justify-content: center; }
+    .bk-dd-list li.selected .bk-check { background: #e11d48; border-color: #e11d48; }
+    .bk-dd-list li.selected .bk-check::after { content: ""; width: 5px; height: 9px; border: solid #fff; border-width: 0 2px 2px 0; transform: rotate(45deg) translate(-1px, -1px); }
+
+    .footer-admin { margin: 16px 0 0; }
+    .adm-open { background: none; border: 1px solid rgba(255,255,255,.35); color: #ffffff; opacity: .7; font: inherit; font-size: 12px; padding: 6px 14px; border-radius: 9999px; cursor: pointer; }
+    .adm-open:hover { opacity: 1; }
+    #adm-panel { position: fixed; inset: 0; z-index: 200; background: #f4f4f6; overflow-y: auto; font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif; color: #111; -webkit-overflow-scrolling: touch; }
+    #adm-panel[hidden], .adm-login[hidden], .adm-dash[hidden], .adm-tab-body[hidden] { display: none !important; }
+    .adm-login { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px; box-sizing: border-box; }
+    .adm-login-card { background: #fff; width: 100%; max-width: 380px; border-radius: 20px; padding: 28px; box-shadow: 0 10px 30px rgba(0,0,0,.08); box-sizing: border-box; }
+    .adm-brand { font-size: 12px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: #e11d48; margin: 0 0 6px; }
+    .adm-h1 { font-size: 24px; margin: 0 0 20px; color: #111; }
+    .adm-field { margin-bottom: 14px; }
+    .adm-label { display: block; font-size: 13px; font-weight: 700; margin: 0 0 6px; color: #111; }
+    .adm-input { width: 100%; font: inherit; font-size: 15px; padding: 12px 14px; border: 1.5px solid #d4d4d8; border-radius: 12px; background: #fff; color: #111; box-sizing: border-box; }
+    .adm-input:focus { outline: none; border-color: #e11d48; }
+    .adm-btn { display: inline-block; padding: 14px 20px; border: none; border-radius: 12px; background: #111; color: #fff; font: inherit; font-weight: 800; font-size: 15px; cursor: pointer; text-align: center; }
+    .adm-btn.primary { background: #e11d48; width: 100%; }
+    .adm-btn.ghost { background: #ffffff; color: #111; border: 1.5px solid #111; width: 100%; margin-top: 10px; }
+    .adm-btn.link { background: none; color: #ffffff; padding: 4px 0; font-size: 13px; opacity: .85; }
+    .adm-msg { font-size: 14px; font-weight: 700; min-height: 20px; margin: 12px 0 0; }
+    .adm-msg.err { color: #e11d48; }
+    .adm-msg.ok { color: #15803d; }
+    .adm-top { background: #111; color: #fff; padding: 14px 20px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 5; }
+    .adm-top .adm-brand { color: #ffffff; opacity: .7; margin: 0; font-size: 11px; }
+    .adm-top strong { font-size: 17px; display: block; }
+    .adm-who { font-size: 12px; opacity: .7; text-align: right; }
+    .adm-top-right { text-align: right; display: flex; flex-direction: column; align-items: flex-end; }
+    .adm-tabs { display: flex; gap: 6px; max-width: 760px; margin: 16px auto 0; padding: 0 16px; box-sizing: border-box; }
+    .adm-tab { flex: 1; padding: 11px; border: none; border-radius: 12px; background: #e6e6ea; font: inherit; font-weight: 700; cursor: pointer; color: #111; }
+    .adm-tab.active { background: #e11d48; color: #fff; }
+    .adm-wrap { max-width: 760px; margin: 0 auto; padding: 16px 16px 90px; box-sizing: border-box; }
+    .adm-card { background: #fff; border-radius: 18px; padding: 20px; margin-bottom: 16px; box-shadow: 0 1px 3px rgba(0,0,0,.05); }
+    .adm-card h2 { font-size: 16px; margin: 0 0 4px; color: #111; }
+    .adm-lead { font-size: 13px; color: #6e6e73; margin: 0 0 16px; }
+    .adm-grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    @media (max-width: 560px) { .adm-grid2 { grid-template-columns: 1fr; } }
+    .adm-img-row { display: flex; gap: 12px; align-items: flex-start; }
+    .adm-img-row .adm-input-wrap { flex: 1; min-width: 0; }
+    .adm-thumb { width: 72px; height: 72px; flex-shrink: 0; border-radius: 12px; background: #eeeef0 center/cover no-repeat; border: 1.5px solid #d4d4d8; display: flex; align-items: center; justify-content: center; font-size: 10px; color: #8e8e93; text-align: center; padding: 4px; overflow: hidden; box-sizing: border-box; }
+    .adm-thumb.err { color: #e11d48; }
+    .adm-hero-thumb { width: 100%; height: 180px; border-radius: 14px; background: #eeeef0 center/cover no-repeat; border: 1.5px solid #d4d4d8; display: flex; align-items: center; justify-content: center; font-size: 13px; color: #8e8e93; margin-bottom: 12px; overflow: hidden; box-sizing: border-box; }
+    .adm-hero-thumb.err { color: #e11d48; }
+    .adm-head-row { display: flex; justify-content: space-between; align-items: center; margin: 0 0 8px; }
+    .adm-head-row .adm-label { margin: 0; }
+    .adm-badge { font-size: 11px; font-weight: 800; padding: 3px 9px; border-radius: 9999px; background: #eeeef0; color: #6e6e73; }
+    .adm-badge.custom { background: #fdf2f4; color: #e11d48; }
+    .adm-gal-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 14px; }
+    .adm-gal-card { border: 1.5px solid #ececf0; border-radius: 16px; padding: 12px; background: #fafafb; }
+    .adm-gal-thumb { width: 100%; aspect-ratio: 4 / 3; border-radius: 12px; background: #eeeef0 center/cover no-repeat; border: 1.5px solid #d4d4d8; display: flex; align-items: center; justify-content: center; font-size: 12px; color: #8e8e93; text-align: center; padding: 6px; overflow: hidden; box-sizing: border-box; margin-bottom: 10px; }
+    .adm-gal-thumb.err { color: #e11d48; }
+    .adm-gal-card .adm-input { font-size: 13px; padding: 10px 12px; }
+    .adm-danger { border: 1.5px solid #fecdd3; background: #fff8f9; }
+    .adm-btn.danger { background: #fff; color: #e11d48; border: 1.5px solid #e11d48; width: 100%; }
+    .adm-btn.danger.confirm { background: #e11d48; color: #fff; }
+    .adm-savebar { position: sticky; bottom: 0; background: linear-gradient(rgba(244,244,246,0), #f4f4f6 30%); padding: 20px 0 4px; }
+    .adm-bk { border: 1.5px solid #ececf0; border-radius: 14px; padding: 14px; margin-bottom: 10px; background: #fff; }
+    .adm-bk-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; }
+    .adm-bk-name { font-weight: 800; font-size: 16px; color: #111; }
+    .adm-bk-time { font-size: 12px; color: #8e8e93; white-space: nowrap; }
+    .adm-bk-contact { margin-top: 4px; font-size: 14px; color: #3a3a3c; font-weight: 600; word-break: break-word; }
+    .adm-new { display: inline-block; margin-left: 8px; padding: 2px 8px; border-radius: 9999px; background: #e11d48; color: #fff; font-size: 10px; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; vertical-align: middle; }
+    .adm-bk-price { margin-top: 10px; font-size: 12px; color: #8e8e93; font-weight: 600; }
+    .adm-acts { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+    .adm-act { flex: 1 1 90px; text-align: center; padding: 11px 12px; border-radius: 12px; font-size: 14px; font-weight: 800; text-decoration: none; color: #fff; box-sizing: border-box; }
+    .adm-act.call { background: #111; }
+    .adm-act.wa { background: #25d366; }
+    .adm-act.mail { background: #fff; color: #111; border: 1.5px solid #111; padding: 9.5px 12px; }
+    .adm-new.ok { background: #15803d; }
+    .adm-manage { display: flex; gap: 8px; margin-top: 10px; }
+    .adm-confirm { flex: 1; display: flex; align-items: center; justify-content: center; gap: 8px; padding: 11px 12px; border: 1.5px solid #15803d; border-radius: 12px; background: #fff; color: #15803d; font: inherit; font-size: 14px; font-weight: 800; cursor: pointer; }
+    .adm-confirm.done { background: #15803d; color: #fff; }
+    .adm-confirm:disabled, .adm-del:disabled { opacity: .5; }
+    .adm-del { display: flex; align-items: center; justify-content: center; gap: 6px; min-width: 46px; padding: 0 14px; border: 1.5px solid #e4e4e8; border-radius: 12px; background: #fff; color: #8e8e93; font: inherit; font-size: 14px; font-weight: 800; cursor: pointer; }
+    .adm-del:hover { color: #e11d48; border-color: #e11d48; }
+    .adm-del.armed { background: #e11d48; border-color: #e11d48; color: #fff; }
+    .adm-bk { transition: opacity .25s ease, transform .25s ease; }
+    .adm-bk.gone { opacity: 0; transform: scale(.97); }
+    #adm-toast { position: fixed; left: 50%; bottom: 24px; transform: translate(-50%, 20px); background: #111; color: #fff; padding: 12px 18px; border-radius: 9999px; font-size: 14px; font-weight: 700; opacity: 0; pointer-events: none; transition: all .25s ease; z-index: 5; max-width: calc(100% - 32px); text-align: center; }
+    #adm-toast.show { opacity: 1; transform: translate(-50%, 0); }
+    .adm-bk-phone { display: inline-block; margin-top: 4px; font-size: 14px; color: #e11d48; font-weight: 700; text-decoration: none; }
+    .adm-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+    .adm-chip { background: #f4f4f6; border-radius: 9999px; padding: 5px 10px; font-size: 12px; font-weight: 600; color: #111; }
+    .adm-chip.red { background: #fdf2f4; color: #e11d48; }
+    .adm-bk-notes { font-size: 13px; color: #3a3a3c; margin-top: 10px; background: #fafafa; padding: 10px; border-radius: 10px; }
+    .adm-empty { text-align: center; color: #8e8e93; padding: 30px 0; font-size: 14px; }
+    .side-dash { display: block; width: 100%; text-align: left; background: none; border: none; font: inherit; font-size: 22px; font-weight: 800; color: #111111; cursor: pointer; padding: 0; }
+    .side-dash { display: inline-flex; align-items: center; gap: 8px; align-self: flex-start; width: auto; margin-top: 18px; padding: 10px 18px; border-radius: 9999px; background: #e11d48; color: #ffffff; font-size: 16px; border: 2px solid #111111; box-shadow: 0 4px 12px rgba(225,29,72,.3); }
+    .side-dash::before { content: "\2699"; font-size: 16px; }
+    .side-dash:hover { opacity: .85; }
+  </style>
+</head>
+<body class="is-loading">
+  <header>
+    <nav class="pill">
+      <span class="logo-group">
+        <span class="logo">T's</span>
+        <span class="logo-sub">Crown &amp; Curls</span>
+      </span>
+      <button class="menu-btn" aria-label="Open menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </nav>
+  </header>
+  <div class="top" id="home">
+    <section class="hero loading" id="hero" role="img" aria-label="Tiffaney's Crown & Curls"></section>
+    <main class="slogan">
+      <h1>Your hair, your story.</h1>
+      <p id="rotating-desc">Short hair, big style &mdash; by Tiffaney's Crown &amp; Curls.</p>
+      <div class="cycle">
+        <button class="cycle-nav" id="prev" aria-label="Previous">&#8249;</button>
+        <button type="button" class="count-wrap" id="pause" aria-label="Pause">
+          <svg class="ring" viewBox="0 0 36 36" aria-hidden="true">
+            <circle class="ring-track" cx="18" cy="18" r="16"></circle>
+            <circle class="ring-fill" id="ring-fill" cx="18" cy="18" r="16"></circle>
+          </svg>
+          <span class="count-num" id="count">5</span>
+        </button>
+        <button class="cycle-nav" id="next" aria-label="Next">&#8250;</button>
+      </div>
+      <div class="cta-row">
+        <button type="button" class="cta" data-open-booking>Book Now</button>
+        <a class="cta cta-outline" href="#about">Learn More</a>
+      </div>
+      </div>
+    </main>
+  </div>
+  <section class="promo" id="prices">
+    <p class="promo-eyebrow">Pricing</p>
+    <p class="promo-price" id="promo-price"><span>Services from</span><br>$50 to $200</p>
+    <p class="promo-sub">Final price depends on the style you choose. Over 25 years of experience &middot; short hair specialists.</p>
+    <ul class="promo-badges">
+      <li>Clean</li>
+      <li>Neat</li>
+      <li>Beautiful</li>
+    </ul>
+    <button type="button" class="promo-cta" data-open-booking>Book Today</button>
+  </section>
+
+  <section class="how">
+    <h2 class="how-title">How It <span>Works</span></h2>
+    <div class="how-steps">
+      <div class="how-step">
+        <span class="how-num">1</span>
+        <div class="how-text">
+          <h3>Book your appointment</h3>
+          <p id="how-deposit">Pick a style and time that works for you. A $10 deposit is required to book your spot.</p>
+        </div>
+      </div>
+      <div class="how-step">
+        <span class="how-num">2</span>
+        <div class="how-text">
+          <h3>Come in and get styled</h3>
+          <p>Sit back while your look comes together, start to finish.</p>
+        </div>
+      </div>
+      <div class="how-step">
+        <span class="how-num">3</span>
+        <div class="how-text">
+          <h3>Leave looking and feeling great</h3>
+          <p>Walk out with a style that's neat, long-lasting and totally you.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="tabs" id="services" aria-label="Services">
+    <div class="tabs-track">
+        <span class="tab accent">Pixie Cuts</span>
+        <span class="tab">Short Hair Styling</span>
+        <span class="tab accent">Finger Waves</span>
+        <span class="tab">Marcel Curls</span>
+        <span class="tab accent">Roller Sets</span>
+        <span class="tab">Shampoo &amp; Style</span>
+        <span class="tab accent">Edge Styling</span>
+        <span class="tab accent">Pixie Cuts</span>
+        <span class="tab">Short Hair Styling</span>
+        <span class="tab accent">Finger Waves</span>
+        <span class="tab">Marcel Curls</span>
+        <span class="tab accent">Roller Sets</span>
+        <span class="tab">Shampoo &amp; Style</span>
+        <span class="tab accent">Edge Styling</span>
+    </div>
+  </div>
+
+  <section class="services-list">
+    <h2 class="services-list-title">Our <span>Services</span></h2>
+    <div class="services-grid">
+      <div class="service-card"><span class="service-card-icon">&#9829;</span>Pixie Cuts</div>
+      <div class="service-card"><span class="service-card-icon">&#9829;</span>Short Hair Styling</div>
+      <div class="service-card"><span class="service-card-icon">&#9829;</span>Finger Waves</div>
+      <div class="service-card"><span class="service-card-icon">&#9829;</span>Marcel Curls</div>
+      <div class="service-card"><span class="service-card-icon">&#9829;</span>Roller Sets</div>
+      <div class="service-card"><span class="service-card-icon">&#9829;</span>Shampoo &amp; Style</div>
+      <div class="service-card"><span class="service-card-icon">&#9829;</span>Edge Styling</div>
+      <div class="service-card"><span class="service-card-icon">&#9829;</span>Deep Conditioning</div>
+      <div class="service-card full">&amp; more!</div>
+    </div>
+  </section>
+
+  <script>
+    (function () {
+      var messages = [
+        "Short hair, big style &mdash; by Tiffaney's Crown & Curls.",
+        "Pixie cuts shaped to flatter every face.",
+        "Finger waves with that classic, clean finish.",
+        "Marcel curls for timeless, polished style.",
+        "Roller sets done the old-school, right way.",
+        "Shampoo and style that leaves hair fresh and healthy.",
+        "Edge styling sharp enough to turn heads.",
+        "Over 25 years of experience behind every chair.",
+        "Clean. Neat. Beautiful. Every single time.",
+        "It's not just hair, it's confidence.",
+        "Specializing in short hair and classic styles.",
+        "Let Tiffaney bring out the best in your short hair."
+      ];
+      var SECONDS = 5;
+      var el = document.getElementById("rotating-desc");
+      var count = document.getElementById("count");
+      var fill = document.getElementById("ring-fill");
+      var prevBtn = document.getElementById("prev");
+      var nextBtn = document.getElementById("next");
+      var pauseBtn = document.getElementById("pause");
+      var i = 0;
+      var left = SECONDS;
+      var paused = false;
+      var fadeTimer = null;
+
+      function restartRing() {
+        fill.classList.remove("run");
+        void fill.getBoundingClientRect(); // force reflow so the animation restarts
+        fill.classList.add("run");
+        if (paused) { fill.classList.add("paused"); }
+      }
+
+      function show(n) {
+        i = (n + messages.length) % messages.length; // update index immediately
+        left = SECONDS;
+        count.textContent = left;
+        restartRing();
+        el.classList.add("fade-out");
+        clearTimeout(fadeTimer);
+        fadeTimer = setTimeout(function () {
+          el.textContent = messages[i];
+          el.classList.remove("fade-out");
+        }, 500);
+      }
+
+      function setPaused(value) {
+        paused = value;
+        fill.classList.toggle("paused", paused);
+        pauseBtn.setAttribute("aria-label", paused ? "Resume" : "Pause");
+      }
+
+      prevBtn.addEventListener("click", function () { show(i - 1); });
+      nextBtn.addEventListener("click", function () { show(i + 1); });
+      pauseBtn.addEventListener("click", function () { setPaused(!paused); });
+
+      restartRing();
+      count.textContent = left;
+
+      setInterval(function () {
+        if (paused) { return; }
+        if (left > 1) {
+          left--;
+          count.textContent = left;
+        } else {
+          show(i + 1);
+        }
+      }, 1000);
+    })();
+  </script>
+  <script>
+    (function () {
+      var hero = document.getElementById("hero");
+      var src = "https://cdn.phototourl.com/member/2026-10-06-19d96efd-ec39-4480-9c98-06853ce154e7.jpg";
+      var MIN_SHIMMER = 5000; // always show the skeleton for at least 5 seconds
+      var loaded = false;
+      var failed = false;
+      var timeUp = false;
+      var finished = false;
+      var img = new Image();
+
+      function tryFinish() {
+        if (finished || !timeUp) { return; }
+        if (!loaded && !failed) { return; } // still waiting on the network
+        finished = true;
+        if (loaded) {
+          hero.style.backgroundImage = 'url("' + src + '")';
+        }
+        // on failure the dark fallback colour stays
+        hero.classList.remove("loading");
+        document.body.classList.remove("is-loading");
+      }
+
+      setTimeout(function () {
+        timeUp = true;
+        tryFinish();
+      }, MIN_SHIMMER);
+
+      img.onload = function () { loaded = true; tryFinish(); };
+      img.onerror = function () { failed = true; tryFinish(); };
+      img.src = src;
+    })();
+  </script>
+  <section class="gallery" id="gallery">
+    <h2 class="gallery-title">Our <span>Work</span></h2>
+    <div class="gallery-grid">
+      <div class="gallery-item wide" style="background-image: url('https://cdn.phototourl.com/member/2026-10-06-19d96efd-ec39-4480-9c98-06853ce154e7.jpg');"></div>
+      <div class="gallery-item" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS9hoWnJQTciWLuYrRuifYvec-EavDpO63SPCkOxXgYT-HasVXXbonvACU&s=10');"></div>
+      <div class="gallery-item" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTUZZNuM_RdhzxQCSrAtLAaT9JCmubUTEJCOPxIH9PKFbdEmArUgD4itt94&s=10');"></div>
+      <div class="gallery-item" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTYUSJLJBmMgA_7f8ecBaqW0SjJAdsxZW-dgWeQHf53ntWR05zG-uzn8Ng&s=10');"></div>
+      <div class="gallery-item" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSF05cKzOJwHAtrrKpwWJx6e-rMQl8EqxOAavFxKldAfQuHPtmNXYWey78&s=10');"></div>
+    </div>
+  </section>
+
+  <section class="faq">
+    <h2 class="faq-title">Frequently Asked <span>Questions</span></h2>
+    <div class="faq-list" id="faq-list">
+      <div class="faq-item">
+        <button class="faq-q" type="button">
+          <span>Do I need a deposit to book?</span>
+          <span class="faq-q-icon">+</span>
+        </button>
+        <div class="faq-a">
+          <div class="faq-a-inner" id="faq-deposit">Yes, a $10 deposit is required to book your appointment.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" type="button">
+          <span>Is hair included in the price?</span>
+          <span class="faq-q-icon">+</span>
+        </button>
+        <div class="faq-a">
+          <div class="faq-a-inner">Yes, hair is included with every style.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" type="button">
+          <span>How long does an appointment take?</span>
+          <span class="faq-q-icon">+</span>
+        </button>
+        <div class="faq-a">
+          <div class="faq-a-inner">It depends on the style you choose &mdash; we'll give you a time estimate when you book.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" type="button">
+          <span>How do I book an appointment?</span>
+          <span class="faq-q-icon">+</span>
+        </button>
+        <div class="faq-a">
+          <div class="faq-a-inner">Tap any "Book Now" button on this page to get started.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="about" id="about">
+    <h2 class="about-title">About <span>Tiffaney's Crown &amp; Curls</span></h2>
+    <p>Tiffaney's Crown &amp; Curls Hair Studio specializes in short hair and the classic styles that never go out of style &mdash; clean, neat, and beautiful, every single time. With over 25 years of experience behind the chair, Tiffaney brings a level of craft and care that only comes from decades of doing this work.</p>
+    <p>From pixie cuts and finger waves to Marcel curls, roller sets, and edge styling, every appointment is about more than hair. As the studio's motto goes: it's not just hair, it's confidence.</p>
+    <p>Let Tiffaney bring out the best in your short hair.</p>
+  </section>
+
+  <section class="contact" id="contact">
+    <h2 class="contact-title">Get In <span>Touch</span></h2>
+    <p class="contact-sub">Spaces fill up fast &mdash; call or text to book today.</p>
+    <a class="contact-call" href="tel:+13184645073" target="_self" rel="nofollow" role="button" aria-label="Call Tiffaney's Crown &amp; Curls at (318) 464-5073">&#128222; Call (318) 464-5073</a>
+    <a class="contact-call contact-wa" href="https://wa.me/13184645073" target="_blank" rel="noopener">&#128172; Message on WhatsApp</a>
+  </section>
+
+  <section class="location" id="location">
+    <h2 class="location-title">Our <span>Location</span></h2>
+    <p class="location-sub">Louisiana, USA</p>
+    <iframe class="location-map" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+      src="https://www.google.com/maps?q=Louisiana&amp;output=embed" title="Map of Louisiana"></iframe>
+    <a class="location-dir" href="https://www.google.com/maps/search/?api=1&amp;query=Louisiana" target="_blank" rel="noopener">Get Directions</a>
+  </section>
+
+  <footer>
+    <p class="footer-logo">Tiffaney's <span>Crown &amp; Curls</span></p>
+    <p class="footer-tag">Short Hair &middot; Big Style</p>
+    <ul class="footer-links">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#prices">Prices</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="#location">Location</a></li>
+    </ul>
+    <p class="footer-social"><a href="tel:+13184645073">(318) 464-5073</a></p>
+    <hr class="footer-rule">
+        <p class="footer-copy">&copy; 2026 Tiffaney's Crown &amp; Curls Hair Studio. All rights reserved.</p>
+  </footer>
+
+  <script>
+    (function () {
+      var items = document.querySelectorAll("#faq-list .faq-item");
+      items.forEach(function (item) {
+        var btn = item.querySelector(".faq-q");
+        var answer = item.querySelector(".faq-a");
+        btn.addEventListener("click", function () {
+          var isOpen = item.classList.contains("open");
+          items.forEach(function (other) {
+            other.classList.remove("open");
+            other.querySelector(".faq-a").style.maxHeight = null;
+          });
+          if (!isOpen) {
+            item.classList.add("open");
+            answer.style.maxHeight = answer.scrollHeight + "px";
+          }
+        });
+      });
+    })();
+  </script>
+
+  <div class="overlay" id="overlay"></div>
+  <aside class="sidebar" id="sidebar" aria-hidden="true">
+    <div class="side-top">
+      <div class="side-brand">
+        <span class="logo-group">
+          <span class="logo">T's</span>
+          <span class="logo-sub">Crown &amp; Curls</span>
+        </span>
+      </div>
+      <button class="close-btn" id="close" aria-label="Close menu">Close</button>
+    </div>
+    <nav class="side-nav">
+      <a href="#home">Home</a>
+      <a href="#services">Services</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#prices">Prices</a>
+      <a href="#contact">Contact</a>
+      <button type="button" class="side-dash" id="adm-open">Dashboard</button>
+    </nav>
+    <button type="button" class="cta" data-open-booking>Book Now</button>
+  </aside>
+  <script>
+    (function () {
+      var menuBtn = document.querySelector(".menu-btn");
+      var closeBtn = document.getElementById("close");
+      var overlay = document.getElementById("overlay");
+      var sidebar = document.getElementById("sidebar");
+
+      function openMenu() {
+        document.documentElement.classList.add("menu-open");
+        sidebar.classList.add("open");
+        overlay.classList.add("open");
+        sidebar.setAttribute("aria-hidden", "false");
+      }
+      function closeMenu() {
+        document.documentElement.classList.remove("menu-open");
+        sidebar.classList.remove("open");
+        overlay.classList.remove("open");
+        sidebar.setAttribute("aria-hidden", "true");
+      }
+
+      menuBtn.addEventListener("click", openMenu);
+      closeBtn.addEventListener("click", closeMenu);
+      overlay.addEventListener("click", closeMenu);
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape") { closeMenu(); }
+      });
+      sidebar.querySelectorAll("a").forEach(function (link) {
+        link.addEventListener("click", closeMenu);
+      });
+    })();
+  </script>
+
+  <div class="bk-backdrop" id="bk-backdrop"></div>
+  <div class="bk-modal" id="bk-modal" role="dialog" aria-modal="true" aria-labelledby="bk-title">
+    <div class="bk-head">
+      <button type="button" class="bk-close" id="bk-close" aria-label="Close">&times;</button>
+      <h3 id="bk-title">Book Your Appointment</h3>
+      <p class="bk-sub">Fill in your details and send your request. We'll contact you to confirm.</p>
+    </div>
+    <div class="bk-body">
+      <div id="bk-form">
+      <div class="bk-field"><label for="bk-name">Full name *</label><input id="bk-name" type="text" autocomplete="name"></div>
+      <div class="bk-field"><label for="bk-phone">Phone number *</label><input id="bk-phone" type="tel" autocomplete="tel" placeholder="(318) 555-1234"></div>
+      <div class="bk-field"><label for="bk-email">Email (optional)</label><input id="bk-email" type="email" autocomplete="email" placeholder="you@example.com"></div>
+      <div class="bk-field">
+        <label>Services (select all that apply)</label>
+        <div class="bk-dd" id="bk-dd">
+          <button type="button" class="bk-dd-btn" id="bk-dd-btn" aria-expanded="false">
+            <span id="bk-dd-label">Choose services</span>
+            <span class="bk-dd-arrow" aria-hidden="true">&#9662;</span>
+          </button>
+          <ul class="bk-dd-list" id="bk-dd-list" hidden>
+            <li data-value="Pixie cut"><span class="bk-check"></span>Pixie cut</li>
+            <li data-value="Short cut / classic style"><span class="bk-check"></span>Short cut / classic style</li>
+            <li data-value="Finger waves"><span class="bk-check"></span>Finger waves</li>
+            <li data-value="Marcel curls"><span class="bk-check"></span>Marcel curls</li>
+            <li data-value="Roller set"><span class="bk-check"></span>Roller set</li>
+            <li data-value="Edge styling"><span class="bk-check"></span>Edge styling</li>
+            <li data-value="Blow dry"><span class="bk-check"></span>Blow dry</li>
+            <li data-value="Wash & condition"><span class="bk-check"></span>Wash &amp; condition</li>
+            <li data-value="Shampoo & set"><span class="bk-check"></span>Shampoo &amp; set</li>
+            <li data-value="Trim"><span class="bk-check"></span>Trim</li>
+            <li data-value="Updo / special occasion"><span class="bk-check"></span>Updo / special occasion</li>
+            <li data-value="Not sure yet"><span class="bk-check"></span>Not sure yet</li>
+          </ul>
+        </div>
+      </div>
+      <div class="bk-row">
+        <div class="bk-field"><label for="bk-date">Preferred date</label><input id="bk-date" type="date"></div>
+        <div class="bk-field"><label for="bk-time">Preferred time</label><input id="bk-time" type="time"></div>
+      </div>
+      <div class="bk-field"><label for="bk-notes">Notes</label><textarea id="bk-notes" placeholder="Anything we should know?"></textarea></div>
+      <p class="bk-error" id="bk-error"></p>
+      <button type="button" class="bk-submit" id="bk-submit">Submit booking request</button>
+      </div>
+      <div class="bk-done" id="bk-done" hidden>
+        <div class="bk-done-icon">&#10003;</div>
+        <h4>Request sent!</h4>
+        <p>Thank you. We received your booking request and will contact you soon to confirm your appointment.</p>
+        <button type="button" class="bk-submit" id="bk-done-btn">Done</button>
+      </div>
+    </div>
+  </div>
+  <script>
+    // Locks page scroll behind popups. Uses position:fixed so it also works on iOS Safari.
+    (function () {
+      var locks = 0, savedY = 0;
+      window.bkLockScroll = function () {
+        if (locks++ > 0) { return; }
+        savedY = window.pageYOffset || document.documentElement.scrollTop || 0;
+        var b = document.body;
+        b.style.position = "fixed";
+        b.style.top = (-savedY) + "px";
+        b.style.left = "0";
+        b.style.right = "0";
+        b.style.width = "100%";
+        document.documentElement.style.overflow = "hidden";
+      };
+      window.bkUnlockScroll = function () {
+        if (locks === 0) { return; }
+        if (--locks > 0) { return; }
+        var b = document.body, h = document.documentElement;
+        b.style.position = ""; b.style.top = ""; b.style.left = ""; b.style.right = ""; b.style.width = "";
+        h.style.overflow = "";
+        var prev = h.style.scrollBehavior;
+        h.style.scrollBehavior = "auto";
+        window.scrollTo(0, savedY);
+        h.style.scrollBehavior = prev;
+      };
+    })();
+  </script>
+
+  <script>
+    (function () {
+      var backdrop = document.getElementById("bk-backdrop");
+      var modal = document.getElementById("bk-modal");
+      var closeX = document.getElementById("bk-close");
+      var submit = document.getElementById("bk-submit");
+      var errorEl = document.getElementById("bk-error");
+      var formEl = document.getElementById("bk-form");
+      var doneEl = document.getElementById("bk-done");
+      var SUBMIT_LABEL = "Submit booking request";
+      var bkLocked = false;
+
+      function openBooking() {
+        // close the side menu if it's open
+        document.documentElement.classList.remove("menu-open");
+        document.getElementById("sidebar").classList.remove("open");
+        document.getElementById("overlay").classList.remove("open");
+        formEl.hidden = false;
+        doneEl.hidden = true;
+        backdrop.classList.add("open");
+        modal.classList.add("open");
+        errorEl.textContent = "";
+        if (!bkLocked) { bkLocked = true; window.bkLockScroll(); }
+      }
+      function closeBooking() {
+        backdrop.classList.remove("open");
+        modal.classList.remove("open");
+        if (bkLocked) { bkLocked = false; window.bkUnlockScroll(); }
+      }
+      function val(id) { return document.getElementById(id).value.trim(); }
+      function clearForm() {
+        ["bk-name", "bk-phone", "bk-email", "bk-date", "bk-time", "bk-notes"].forEach(function (id) {
+          document.getElementById(id).value = "";
+        });
+        if (window.bkResetServices) { window.bkResetServices(); }
+      }
+
+      document.querySelectorAll("[data-open-booking]").forEach(function (b) {
+        b.addEventListener("click", openBooking);
+      });
+      closeX.addEventListener("click", closeBooking);
+      backdrop.addEventListener("click", closeBooking);
+      document.getElementById("bk-done-btn").addEventListener("click", closeBooking);
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape") { closeBooking(); }
+      });
+
+      submit.addEventListener("click", function () {
+        var name = val("bk-name");
+        var phone = val("bk-phone");
+        var email = val("bk-email");
+        if (!name || !phone) {
+          errorEl.textContent = "Please enter your name and phone number.";
+          return;
+        }
+        if (phone.replace(/\D/g, "").length < 10) {
+          errorEl.textContent = "Please enter a valid phone number.";
+          return;
+        }
+        if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+          errorEl.textContent = "That email address doesn't look right.";
+          return;
+        }
+        errorEl.textContent = "";
+        submit.disabled = true;
+        submit.textContent = "Sending…";
+        window.bkSaveBooking({
+          name: name,
+          phone: phone,
+          email: email,
+          services: window.bkGetServices() || "Not selected",
+          date: val("bk-date") || "",
+          time: val("bk-time") || "",
+          notes: val("bk-notes") || ""
+        }).then(function (ok) {
+          submit.disabled = false;
+          submit.textContent = SUBMIT_LABEL;
+          if (ok) {
+            clearForm();
+            formEl.hidden = true;
+            doneEl.hidden = false;
+          } else {
+            errorEl.textContent = "Sorry, we couldn't send your request. Please check your connection and try again.";
+          }
+        });
+      });
+    })();
+  </script>
+
+  <script>
+    (function () {
+      var btn = document.getElementById("bk-dd-btn");
+      var list = document.getElementById("bk-dd-list");
+      var label = document.getElementById("bk-dd-label");
+      var items = list.querySelectorAll("li");
+
+      function refresh() {
+        var picked = [];
+        items.forEach(function (li) {
+          if (li.classList.contains("selected")) { picked.push(li.getAttribute("data-value")); }
+        });
+        label.textContent = picked.length ? picked.join(", ") : "Choose services";
+      }
+      function setOpen(open) {
+        list.hidden = !open;
+        btn.setAttribute("aria-expanded", open ? "true" : "false");
+      }
+      btn.addEventListener("click", function () { setOpen(list.hidden); });
+      items.forEach(function (li) {
+        li.addEventListener("click", function () {
+          li.classList.toggle("selected");
+          refresh();
+        });
+      });
+      document.addEventListener("click", function (e) {
+        if (!document.getElementById("bk-dd").contains(e.target)) { setOpen(false); }
+      });
+      window.bkGetServices = function () {
+        var picked = [];
+        items.forEach(function (li) {
+          if (li.classList.contains("selected")) { picked.push(li.getAttribute("data-value")); }
+        });
+        return picked.join(", ");
+      };
+      window.bkResetServices = function () {
+        items.forEach(function (li) { li.classList.remove("selected"); });
+        refresh();
+        setOpen(false);
+      };
+    })();
+  </script>
+
+  <script>
+    // Factory defaults: captured from the page as shipped, before any saved settings are applied
+    (function () {
+      var gal = [];
+      document.querySelectorAll(".gallery-item").forEach(function (el) {
+        var m = (el.getAttribute("style") || "").match(/url\(\s*['"]?([^'")]+)['"]?\s*\)/);
+        gal.push(m ? m[1] : "");
+      });
+      window.SITE_DEFAULTS = {
+        priceLabel: "Services from",
+        priceRange: "$50 to $200",
+        deposit: "$10",
+        heroUrl: "https://cdn.phototourl.com/member/2026-10-06-19d96efd-ec39-4480-9c98-06853ce154e7.jpg",
+        gallery: gal
+      };
+    })();
+  </script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/10.12.2/firebase-database-compat.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/10.12.2/firebase-auth-compat.js"></script>
+  <script>
+    (function () {
+      var firebaseConfig = {
+        apiKey: "AIzaSyDFHskUWiyHhZke3KT9kkOtFI_gPsKfiGo",
+        authDomain: "itzhoyoo-f9f7e.firebaseapp.com",
+        databaseURL: "https://itzhoyoo-f9f7e-default-rtdb.firebaseio.com",
+        projectId: "itzhoyoo-f9f7e",
+        storageBucket: "itzhoyoo-f9f7e.firebasestorage.app",
+        messagingSenderId: "1094792075584",
+        appId: "1:1094792075584:web:297346754cbbf8691082a5",
+        measurementId: "G-J8069EYQTJ"
+      };
+      try {
+        if (!firebase.apps.length) { firebase.initializeApp(firebaseConfig); }
+        window.bkDb = firebase.database();
+      } catch (e) {
+        console.error("Firebase init failed. Check that the Firebase scripts loaded.", e);
+      }
+      // Saves a booking. Never throws; resolves true on success, false on failure.
+      window.bkSaveBooking = function (data) {
+        if (!window.bkDb) { return Promise.resolve(false); }
+        data.createdAt = firebase.database.ServerValue.TIMESTAMP;
+        data.source = "website";
+        return window.bkDb.ref("bookings").push(data)
+          .then(function () { return true; })
+          .catch(function (err) { console.error("Booking save failed", err); return false; });
+      };
+    })();
+  </script>
+
+  <script>
+    (function () {
+      function applySite(c) {
+        if (!c) { return; }
+        var hero = document.getElementById("hero");
+        if (hero && c.heroUrl) {
+          hero.style.backgroundImage = 'url("' + c.heroUrl + '")';
+        }
+        if (c.gallery && c.gallery.length) {
+          document.querySelectorAll(".gallery-item").forEach(function (item, i) {
+            if (c.gallery[i]) { item.style.backgroundImage = "url('" + c.gallery[i] + "')"; }
+          });
+        }
+        var price = document.getElementById("promo-price");
+        if (price && (c.priceLabel || c.priceRange)) {
+          price.textContent = "";
+          var span = document.createElement("span");
+          span.textContent = c.priceLabel || "Services from";
+          price.appendChild(span);
+          price.appendChild(document.createElement("br"));
+          price.appendChild(document.createTextNode(c.priceRange || ""));
+        }
+        var dep = c.deposit || "";
+        if (dep) {
+          var how = document.getElementById("how-deposit");
+          if (how) { how.textContent = "Pick a style and time that works for you. A " + dep + " deposit is required to book your spot."; }
+          var faq = document.getElementById("faq-deposit");
+          if (faq) { faq.textContent = "Yes, a " + dep + " deposit is required to book your appointment."; }
+        }
+      }
+      window.bkApplySite = applySite;
+      // Wait until the database connection from the booking script is ready
+      var tries = 0;
+      (function waitDb() {
+        if (window.bkDb) {
+          window.bkDb.ref("site").once("value").then(function (snap) {
+            applySite(snap.val());
+          }).catch(function (err) { console.error("Could not load site settings", err); });
+        } else if (tries++ < 50) {
+          setTimeout(waitDb, 200);
+        }
+      })();
+    })();
+  </script>
+
+  <div id="adm-panel" hidden>
+    <div class="adm-login" id="adm-login" hidden>
+      <div class="adm-login-card">
+        <p class="adm-brand">Tiffaney's Crown &amp; Curls</p>
+        <h1 class="adm-h1">Dashboard login</h1>
+        <div class="adm-field"><label class="adm-label" for="adm-email">Email</label><input class="adm-input" id="adm-email" type="email" autocomplete="username" /></div>
+        <div class="adm-field"><label class="adm-label" for="adm-password">Password</label><input class="adm-input" id="adm-password" type="password" autocomplete="current-password" /></div>
+        <button class="adm-btn primary" id="adm-login-btn" type="button">Log in</button>
+        <button class="adm-btn ghost" id="adm-close-login" type="button">Back to site</button>
+        <p class="adm-msg err" id="adm-login-msg"></p>
+      </div>
+    </div>
+
+    <div id="adm-dash" hidden>
+      <div class="adm-top">
+        <div>
+          <p class="adm-brand">Dashboard</p>
+          <strong>Tiffaney's Crown &amp; Curls</strong>
+        </div>
+        <div class="adm-top-right">
+          <div class="adm-who" id="adm-who"></div>
+          <div>
+            <button class="adm-btn link" id="adm-logout" type="button">Log out</button>
+            &nbsp;&nbsp;
+            <button class="adm-btn link" id="adm-close" type="button">Close &times;</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="adm-tabs">
+        <button class="adm-tab active" data-adm-tab="site" type="button">Site content</button>
+        <button class="adm-tab" data-adm-tab="bookings" type="button">Bookings<span id="adm-bk-count"></span></button>
+      </div>
+
+      <div class="adm-wrap adm-tab-body" id="adm-tab-site">
+        <div class="adm-card">
+          <h2>Pricing &amp; deposit</h2>
+          <p class="adm-lead">Changes show in the pricing section, How It Works, and the FAQ.</p>
+          <div class="adm-grid2">
+            <div class="adm-field"><label class="adm-label" for="adm-price-label">Price label</label><input class="adm-input" id="adm-price-label" type="text" placeholder="Services from" /></div>
+            <div class="adm-field"><label class="adm-label" for="adm-price-range">Price range</label><input class="adm-input" id="adm-price-range" type="text" placeholder="$50 to $200" /></div>
+          </div>
+          <div class="adm-field" style="margin-bottom:0"><label class="adm-label" for="adm-deposit">Booking deposit</label><input class="adm-input" id="adm-deposit" type="text" placeholder="$10" /></div>
+        </div>
+
+        <div class="adm-card">
+          <h2>Hero image</h2>
+          <p class="adm-lead">The large photo at the top of the page.</p>
+          <div class="adm-head-row"><span class="adm-label">Current image</span><span class="adm-badge" id="adm-hero-badge"></span></div>
+          <div class="adm-hero-thumb" id="adm-hero-prev">No image</div>
+          <div class="adm-field" style="margin-bottom:0">
+            <label class="adm-label" for="adm-hero-url">Image link</label>
+            <input class="adm-input" id="adm-hero-url" type="url" placeholder="https://..." />
+          </div>
+        </div>
+
+        <div class="adm-card">
+          <h2>Gallery</h2>
+          <p class="adm-lead">Five photos in the Our Work section. Each box shows the photo live on your site. Clear a box to go back to its original photo.</p>
+          <div id="adm-gal-list"></div>
+        </div>
+
+        <div class="adm-card adm-danger">
+          <h2>Reset to factory</h2>
+          <p class="adm-lead">Puts the pricing, deposit, hero image and all gallery photos back to how the site was originally built. Bookings are not touched.</p>
+          <button class="adm-btn danger" id="adm-reset" type="button">Reset to factory</button>
+          <p class="adm-msg" id="adm-reset-msg"></p>
+        </div>
+
+        <div class="adm-savebar">
+          <button class="adm-btn primary" id="adm-save" type="button">Save changes</button>
+          <p class="adm-msg" id="adm-save-msg"></p>
+        </div>
+      </div>
+
+      <div class="adm-wrap adm-tab-body" id="adm-tab-bookings" hidden>
+        <div class="adm-card">
+          <h2>Latest bookings</h2>
+          <p class="adm-lead">The 30 most recent requests. Tap Call, WhatsApp or Email to reply. Messages are pre-filled with their booking, your price range and deposit.</p>
+          <div id="adm-bookings"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      var GALLERY_SLOTS = 5;
+      var panel = document.getElementById("adm-panel");
+      var loginView = document.getElementById("adm-login");
+      var dashView = document.getElementById("adm-dash");
+      function $(id) { return document.getElementById(id); }
+      function setMsg(el, text, ok) { el.textContent = text; el.className = "adm-msg " + (ok ? "ok" : "err"); }
+
+      // Firebase is initialised by the booking script; wait for it
+      function whenReady(fn) {
+        if (window.firebase && firebase.auth && window.bkDb) { fn(); }
+        else { setTimeout(function () { whenReady(fn); }, 150); }
+      }
+
+      whenReady(function () {
+        var auth = firebase.auth();
+        var db = window.bkDb;
+
+        // ---- Previews ----
+        var DEF = window.SITE_DEFAULTS || { gallery: [] };
+        function showPreview(box, url, badge, def) {
+          url = url || "";
+          var effective = url || def || "";
+          var isOriginal = !url || url === def;
+          if (badge) {
+            badge.textContent = isOriginal ? "Original" : "Custom";
+            badge.className = "adm-badge" + (isOriginal ? "" : " custom");
+          }
+          box.classList.remove("err");
+          box.style.backgroundImage = "";
+          if (!effective) { box.textContent = "No image"; return; }
+          box.textContent = "Loading…";
+          var test = new Image();
+          test.onload = function () {
+            if (box.getAttribute("data-url") !== effective) { return; }
+            box.style.backgroundImage = 'url("' + effective + '")'; box.textContent = "";
+          };
+          test.onerror = function () {
+            if (box.getAttribute("data-url") !== effective) { return; }
+            box.classList.add("err"); box.textContent = "Can't load this link";
+          };
+          box.setAttribute("data-url", effective);
+          test.src = effective;
+        }
+
+        var galList = $("adm-gal-list");
+        galList.className = "adm-gal-grid";
+        for (var i = 0; i < GALLERY_SLOTS; i++) {
+          var row = document.createElement("div");
+          row.className = "adm-gal-card";
+          row.innerHTML = '<div class="adm-head-row"><span class="adm-label">Photo ' + (i + 1) + '</span><span class="adm-badge" id="adm-gal-badge-' + i + '"></span></div>' +
+            '<div class="adm-gal-thumb" id="adm-gal-prev-' + i + '">No image</div>' +
+            '<input class="adm-input adm-gal" type="url" placeholder="https://..." />';
+          galList.appendChild(row);
+        }
+        $("adm-hero-url").addEventListener("input", function () {
+          showPreview($("adm-hero-prev"), this.value.trim(), $("adm-hero-badge"), DEF.heroUrl);
+        });
+        document.querySelectorAll(".adm-gal").forEach(function (inp, idx) {
+          inp.addEventListener("input", function () {
+            showPreview($("adm-gal-prev-" + idx), this.value.trim(), $("adm-gal-badge-" + idx), DEF.gallery[idx]);
+          });
+        });
+
+        var siteCfg = {};
+        function cfg(k) { return siteCfg[k] || DEF[k] || ""; }
+
+        // ---- Site settings ----
+        // Shows what is live right now: saved value if there is one, otherwise the factory default
+        function fillForm(site) {
+          site = site || {};
+          $("adm-price-label").value = site.priceLabel || DEF.priceLabel || "";
+          $("adm-price-range").value = site.priceRange || DEF.priceRange || "";
+          $("adm-deposit").value = site.deposit || DEF.deposit || "";
+          var hero = site.heroUrl || DEF.heroUrl || "";
+          $("adm-hero-url").value = hero;
+          showPreview($("adm-hero-prev"), hero, $("adm-hero-badge"), DEF.heroUrl);
+          var gal = site.gallery || [];
+          document.querySelectorAll(".adm-gal").forEach(function (inp, idx) {
+            var v = gal[idx] || DEF.gallery[idx] || "";
+            inp.value = v;
+            showPreview($("adm-gal-prev-" + idx), v, $("adm-gal-badge-" + idx), DEF.gallery[idx]);
+          });
+        }
+        function loadSite() {
+          db.ref("site").once("value")
+            .then(function (snap) { siteCfg = snap.val() || {}; fillForm(snap.val()); })
+            .catch(function () { setMsg($("adm-save-msg"), "Could not load site settings.", false); });
+        }
+        $("adm-save").addEventListener("click", function () {
+          var gal = [];
+          document.querySelectorAll(".adm-gal").forEach(function (inp) { gal.push(inp.value.trim()); });
+          var data = {
+            priceLabel: $("adm-price-label").value.trim(),
+            priceRange: $("adm-price-range").value.trim(),
+            deposit: $("adm-deposit").value.trim(),
+            heroUrl: $("adm-hero-url").value.trim(),
+            gallery: gal
+          };
+          setMsg($("adm-save-msg"), "Saving…", true);
+          db.ref("site").set(data)
+            .then(function () {
+              siteCfg = data;
+              if (window.bkApplySite) { window.bkApplySite(data); }
+              setMsg($("adm-save-msg"), "Saved. The site is updated.", true);
+            })
+            .catch(function () { setMsg($("adm-save-msg"), "Save failed. Make sure you're logged in.", false); });
+        });
+
+        // ---- Reset to factory (two taps to confirm) ----
+        var resetBtn = $("adm-reset"), resetTimer = null;
+        function disarmReset() {
+          resetBtn.classList.remove("confirm");
+          resetBtn.textContent = "Reset to factory";
+          clearTimeout(resetTimer);
+        }
+        resetBtn.addEventListener("click", function () {
+          if (!resetBtn.classList.contains("confirm")) {
+            resetBtn.classList.add("confirm");
+            resetBtn.textContent = "Tap again to confirm reset";
+            setMsg($("adm-reset-msg"), "", true);
+            resetTimer = setTimeout(disarmReset, 5000);
+            return;
+          }
+          disarmReset();
+          setMsg($("adm-reset-msg"), "Resetting…", true);
+          db.ref("site").remove()
+            .then(function () {
+              siteCfg = {};
+              fillForm(null);
+              if (window.bkApplySite) { window.bkApplySite(DEF); }
+              setMsg($("adm-reset-msg"), "Reset done. The site is back to its original content.", true);
+            })
+            .catch(function () { setMsg($("adm-reset-msg"), "Reset failed. Make sure you're logged in.", false); });
+        });
+
+        // ---- Bookings ----
+        function fmtTime(ts) {
+          if (!ts) { return ""; }
+          return new Date(ts).toLocaleString(undefined, { month: "short", day: "numeric", hour: "numeric", minute: "2-digit" });
+        }
+        function fmtDate(d) {
+          if (!d) { return ""; }
+          var t = new Date(d + "T00:00:00");
+          return isNaN(t) ? d : t.toLocaleDateString(undefined, { weekday: "short", month: "short", day: "numeric" });
+        }
+        function fmtClock(t) {
+          if (!t) { return ""; }
+          var p = t.split(":"), h = parseInt(p[0], 10);
+          if (isNaN(h)) { return t; }
+          return ((h % 12) || 12) + ":" + (p[1] || "00") + " " + (h >= 12 ? "PM" : "AM");
+        }
+        function chip(text, red) {
+          var c = document.createElement("span");
+          c.className = "adm-chip" + (red ? " red" : "");
+          c.textContent = text;
+          return c;
+        }
+        function waNumber(phone) {
+          var d = String(phone || "").replace(/\D/g, "");
+          if (d.length === 10) { d = "1" + d; }
+          return d;
+        }
+        // Friendly message the admin sends back, built from the booking and the live price + deposit
+        function replyText(b) {
+          if (b.status === "confirmed") {
+            var cw = [fmtDate(b.date), fmtClock(b.time)].filter(Boolean).join(" at ");
+            var cs = b.services && b.services !== "Not selected" ? " for " + b.services : "";
+            return "Hi " + (b.name || "there") + ", this is Tiffaney's Crown & Curls. Your appointment" + cs + (cw ? " on " + cw : "") + " is confirmed. See you then!";
+          }
+          var parts = ["Hi " + (b.name || "there") + ", this is Tiffaney's Crown & Curls. Thank you for your booking request"];
+          var svc = b.services && b.services !== "Not selected" ? b.services : "";
+          if (svc) { parts[0] += " for " + svc; }
+          var when = [fmtDate(b.date), fmtClock(b.time)].filter(Boolean).join(" at ");
+          if (when) { parts[0] += " on " + when; }
+          parts[0] += ".";
+          var price = cfg("priceRange"), dep = cfg("deposit");
+          if (price) { parts.push((cfg("priceLabel") || "Services from") + " " + price + ", depending on the style."); }
+          if (dep) { parts.push("A " + dep + " deposit holds your spot."); }
+          parts.push("Does that time still work for you?");
+          return parts.join(" ");
+        }
+        function action(cls, href, label, external) {
+          var a = document.createElement("a");
+          a.className = "adm-act " + cls;
+          a.href = href;
+          a.textContent = label;
+          if (external) { a.target = "_blank"; a.rel = "noopener"; }
+          return a;
+        }
+        var ICON_BIN = '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18"/><path d="M8 6V4a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6M14 11v6"/></svg>';
+        var ICON_CHECK = '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>';
+        var bkTotal = 0;
+        function setCount() { $("adm-bk-count").textContent = bkTotal ? " (" + bkTotal + ")" : ""; }
+        var toastTimer = null;
+        function toast(msg) {
+          var t = $("adm-toast");
+          if (!t) { t = document.createElement("div"); t.id = "adm-toast"; $("adm-panel").appendChild(t); }
+          t.textContent = msg;
+          t.classList.add("show");
+          clearTimeout(toastTimer);
+          toastTimer = setTimeout(function () { t.classList.remove("show"); }, 3200);
+        }
+        function bookingCard(key, b) {
+          var card = document.createElement("div");
+          card.className = "adm-bk";
+
+          var top = document.createElement("div");
+          top.className = "adm-bk-top";
+          var left = document.createElement("div");
+          var name = document.createElement("div");
+          name.className = "adm-bk-name";
+          name.textContent = b.name || "No name";
+          if (b.status === "confirmed") {
+            var cf = document.createElement("span");
+            cf.className = "adm-new ok";
+            cf.textContent = "Confirmed";
+            name.appendChild(cf);
+          } else if (b.createdAt && Date.now() - b.createdAt < 86400000) {
+            var nw = document.createElement("span");
+            nw.className = "adm-new";
+            nw.textContent = "New";
+            name.appendChild(nw);
+          }
+          left.appendChild(name);
+          var contact = document.createElement("div");
+          contact.className = "adm-bk-contact";
+          contact.textContent = [b.phone, b.email].filter(Boolean).join("  ·  ");
+          left.appendChild(contact);
+          var when = document.createElement("div");
+          when.className = "adm-bk-time";
+          when.textContent = fmtTime(b.createdAt);
+          top.appendChild(left);
+          top.appendChild(when);
+          card.appendChild(top);
+
+          var chips = document.createElement("div");
+          chips.className = "adm-chips";
+          if (b.services) {
+            String(b.services).split(",").forEach(function (x) { if (x.trim()) { chips.appendChild(chip(x.trim(), true)); } });
+          }
+          if (b.date) { chips.appendChild(chip("📅 " + fmtDate(b.date))); }
+          if (b.time) { chips.appendChild(chip("🕒 " + fmtClock(b.time))); }
+          card.appendChild(chips);
+
+          var price = cfg("priceRange"), dep = cfg("deposit");
+          if (price || dep) {
+            var pl = document.createElement("div");
+            pl.className = "adm-bk-price";
+            pl.textContent = [price ? (cfg("priceLabel") || "From") + " " + price : "", dep ? dep + " deposit" : ""].filter(Boolean).join("  ·  ");
+            card.appendChild(pl);
+          }
+
+          if (b.notes) {
+            var n = document.createElement("div");
+            n.className = "adm-bk-notes";
+            n.textContent = b.notes;
+            card.appendChild(n);
+          }
+
+          var acts = document.createElement("div");
+          acts.className = "adm-acts";
+          var msg = replyText(b);
+          var digits = waNumber(b.phone);
+          if (b.phone) { acts.appendChild(action("call", "tel:" + String(b.phone).replace(/[^\d+]/g, ""), "📞 Call")); }
+          if (digits) { acts.appendChild(action("wa", "https://wa.me/" + digits + "?text=" + encodeURIComponent(msg), "💬 WhatsApp", true)); }
+          if (b.email) {
+            acts.appendChild(action("mail", "mailto:" + encodeURIComponent(b.email).replace(/%40/g, "@") +
+              "?subject=" + encodeURIComponent("Your booking request - Tiffaney's Crown & Curls") +
+              "&body=" + encodeURIComponent(msg), "✉️ Email"));
+          }
+          card.appendChild(acts);
+
+          // Confirm + delete row
+          var manage = document.createElement("div");
+          manage.className = "adm-manage";
+          var isConf = b.status === "confirmed";
+          var confBtn = document.createElement("button");
+          confBtn.type = "button";
+          confBtn.className = "adm-confirm" + (isConf ? " done" : "");
+          confBtn.innerHTML = ICON_CHECK + "<span>" + (isConf ? "Confirmed · tap to undo" : "Confirm booking") + "</span>";
+          confBtn.addEventListener("click", function () {
+            var next = isConf ? "pending" : "confirmed";
+            confBtn.disabled = true;
+            var upd = { status: next, confirmedAt: next === "confirmed" ? firebase.database.ServerValue.TIMESTAMP : null };
+            db.ref("bookings").child(key).update(upd)
+              .then(function () {
+                b.status = next;
+                card.replaceWith(bookingCard(key, b));
+                toast(next === "confirmed" ? "Booking confirmed" : "Back to pending");
+              })
+              .catch(function () { confBtn.disabled = false; toast("Couldn't update. Check you're logged in and database rules allow it."); });
+          });
+          var delBtn = document.createElement("button");
+          delBtn.type = "button";
+          delBtn.className = "adm-del";
+          delBtn.setAttribute("aria-label", "Delete booking");
+          delBtn.innerHTML = ICON_BIN;
+          var delTimer = null;
+          delBtn.addEventListener("click", function () {
+            if (!delBtn.classList.contains("armed")) {
+              delBtn.classList.add("armed");
+              delBtn.innerHTML = ICON_BIN + "<span>Delete?</span>";
+              delTimer = setTimeout(function () { delBtn.classList.remove("armed"); delBtn.innerHTML = ICON_BIN; }, 4000);
+              return;
+            }
+            clearTimeout(delTimer);
+            delBtn.disabled = true;
+            db.ref("bookings").child(key).remove()
+              .then(function () {
+                card.classList.add("gone");
+                setTimeout(function () {
+                  card.remove();
+                  bkTotal = Math.max(0, bkTotal - 1);
+                  setCount();
+                  if (!bkTotal) { $("adm-bookings").innerHTML = '<p class="adm-empty">No bookings yet.</p>'; }
+                }, 250);
+                toast("Booking deleted");
+              })
+              .catch(function () {
+                delBtn.disabled = false; delBtn.classList.remove("armed"); delBtn.innerHTML = ICON_BIN;
+                toast("Couldn't delete. Check you're logged in and database rules allow it.");
+              });
+          });
+          manage.appendChild(confBtn);
+          manage.appendChild(delBtn);
+          card.appendChild(manage);
+          return card;
+        }
+        function loadBookings() {
+          var box = $("adm-bookings");
+          box.innerHTML = '<p class="adm-empty">Loading…</p>';
+          db.ref("bookings").limitToLast(30).once("value")
+            .then(function (snap) {
+              var list = [];
+              snap.forEach(function (child) { list.unshift({ key: child.key, b: child.val() }); });
+              box.innerHTML = "";
+              bkTotal = list.length;
+              setCount();
+              if (!list.length) { box.innerHTML = '<p class="adm-empty">No bookings yet.</p>'; return; }
+              list.forEach(function (x) { box.appendChild(bookingCard(x.key, x.b)); });
+            })
+            .catch(function () { box.innerHTML = '<p class="adm-empty">Could not load bookings. Check database rules.</p>'; });
+        }
+
+        // ---- Tabs ----
+        document.querySelectorAll(".adm-tab").forEach(function (t) {
+          t.addEventListener("click", function () {
+            document.querySelectorAll(".adm-tab").forEach(function (x) { x.classList.remove("active"); });
+            t.classList.add("active");
+            var isSite = t.getAttribute("data-adm-tab") === "site";
+            $("adm-tab-site").hidden = !isSite;
+            $("adm-tab-bookings").hidden = isSite;
+            if (!isSite) { loadBookings(); }
+          });
+        });
+
+        // ---- Open / close ----
+        var admLocked = false;
+        function openPanel() {
+          document.documentElement.classList.remove("menu-open");
+          document.getElementById("sidebar").classList.remove("open");
+          document.getElementById("overlay").classList.remove("open");
+          panel.hidden = false;
+          if (!admLocked) { admLocked = true; window.bkLockScroll(); }
+        }
+        function closePanel() {
+          panel.hidden = true;
+          if (admLocked) { admLocked = false; window.bkUnlockScroll(); }
+        }
+        $("adm-open").addEventListener("click", openPanel);
+        $("adm-close").addEventListener("click", closePanel);
+        $("adm-close-login").addEventListener("click", closePanel);
+        document.addEventListener("keydown", function (e) { if (e.key === "Escape") { closePanel(); } });
+
+        // ---- Auth ----
+        $("adm-login-btn").addEventListener("click", function () {
+          setMsg($("adm-login-msg"), "", false);
+          auth.signInWithEmailAndPassword($("adm-email").value.trim(), $("adm-password").value)
+            .catch(function () { setMsg($("adm-login-msg"), "Email or password is incorrect.", false); });
+        });
+        $("adm-password").addEventListener("keydown", function (e) { if (e.key === "Enter") { $("adm-login-btn").click(); } });
+        $("adm-logout").addEventListener("click", function () { auth.signOut(); });
+
+        auth.onAuthStateChanged(function (user) {
+          if (user) {
+            loginView.hidden = true;
+            dashView.hidden = false;
+            $("adm-who").textContent = user.email;
+            loadSite();
+            loadBookings();
+          } else {
+            dashView.hidden = true;
+            loginView.hidden = false;
+          }
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
